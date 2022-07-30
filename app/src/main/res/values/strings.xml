@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">اینستامی</string>
+    <string name="label_brush">قلم</string>
+    <string name="label_shape">حالت</string>
+    <string name="label_oval">بیضی</string>
+    <string name="label_rectangle">مثلث</string>
+    <string name="label_line">خطی</string>
+    <string name="label_emoji">ایموجی</string>
+    <string name="label_sticker">استیکر</string>
+    <string name="label_eraser">پاک کن</string>
+    <string name="label_eraser_mode">پاک کن</string>
+    <string name="label_text">متن</string>
+    <string name="label_filter">فیلتر</string>
+    <string name="label_adjust">تنظیم کردن</string>
+    <string name="msg_save_image">ایا مطمین هستید که میخواهید خارج شوید ؟</string>
+    <string name="app_intent_name">اینستامی</string>
+    <string name="msg_save_image_to_share">لطفا قبل از نشر , ذخیره کنید .</string>
+    <string name="msg_share_image">نشر</string>
+
+    <string-array name="photo_editor_emoji">
+
+        <!-- Smiles -->
+        <item>&#128072;</item>
+        <item>&#x1f44d;&#x1f44d;</item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
