@@ -67,7 +67,6 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
     private var mEmojiBSFragment: EmojiBSFragment? = null
     private var mStickerBSFragment: StickerBSFragment? = null
     private var mTxtCurrentTool: TextView? = null
-//    private var mWonderFont: Typeface? = null
     private var mRvTools: RecyclerView? = null
     private var mRvFilters: RecyclerView? = null
     private val mEditingToolsAdapter = EditingToolsAdapter(this)
@@ -310,8 +309,6 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         }
     }
 
-    // TODO(lucianocheng): Replace onActivityResult with Result API from Google
-    //                     See https://developer.android.com/training/basics/intents/result
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
@@ -375,9 +372,9 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
     private fun showSaveDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage(getString(R.string.msg_save_image))
-        builder.setPositiveButton("Save") { _: DialogInterface?, _: Int -> saveImage() }
-        builder.setNegativeButton("Cancel") { dialog: DialogInterface, _: Int -> dialog.dismiss() }
-        builder.setNeutralButton("Discard") { _: DialogInterface?, _: Int -> finish() }
+        builder.setPositiveButton("ذخیره") { _: DialogInterface?, _: Int -> saveImage() }
+        builder.setNegativeButton("لغو") { dialog: DialogInterface, _: Int -> dialog.dismiss() }
+        builder.setNeutralButton("عدم ذخیره") { _: DialogInterface?, _: Int -> finish() }
         builder.create().show()
     }
 

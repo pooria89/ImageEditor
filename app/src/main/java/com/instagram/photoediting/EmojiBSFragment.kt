@@ -97,6 +97,7 @@ class EmojiBSFragment : BottomSheetDialogFragment() {
          */
         fun getEmojis(context: Context?): ArrayList<String> {
             val convertedEmojiList = ArrayList<String>()
+
             val emojiList = context?.resources?.getStringArray(R.array.photo_editor_emoji)
             if (emojiList != null) {
                 for (emojiUnicode in emojiList) {
