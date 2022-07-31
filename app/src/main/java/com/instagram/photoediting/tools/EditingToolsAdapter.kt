@@ -52,11 +52,11 @@ class EditingToolsAdapter(private val mOnItemSelected: OnItemSelected) :
     }
 
     init {
-        mToolList.add(ToolModel("Shape", R.drawable.ic_oval, ToolType.SHAPE))
-        mToolList.add(ToolModel("Text", R.drawable.ic_text, ToolType.TEXT))
-        mToolList.add(ToolModel("Eraser", R.drawable.ic_eraser, ToolType.ERASER))
-        mToolList.add(ToolModel("Filter", R.drawable.ic_photo_filter, ToolType.FILTER))
-        mToolList.add(ToolModel("Emoji", R.drawable.ic_insert_emoticon, ToolType.EMOJI))
-        mToolList.add(ToolModel("Sticker", R.drawable.ic_sticker, ToolType.STICKER))
+        mToolList.add(ToolModel("اشکال", R.drawable.ic_oval, ToolType.SHAPE))
+        mToolList.add(ToolModel("متن", R.drawable.ic_text, ToolType.TEXT))
+        mToolList.add(ToolModel("پاک کن", R.drawable.ic_eraser, ToolType.ERASER))
+        mToolList.add(ToolModel("فیلتر", R.drawable.ic_photo_filter, ToolType.FILTER))
+        mToolList.add(ToolModel("ایموجی", R.drawable.ic_insert_emoticon, ToolType.EMOJI))
+        mToolList.add(ToolModel("استیکر", R.drawable.ic_sticker, ToolType.STICKER))
     }
 }
