@@ -43,7 +43,8 @@ class ColorPickerAdapter internal constructor(
 
         init {
             itemView.setOnClickListener {
-                if (onColorPickerClickListener != null) onColorPickerClickListener!!.onColorPickerClickListener(
+                if (onColorPickerClickListener != null) onColorPickerClickListener!!
+                    .onColorPickerClickListener(
                     colorPickerColors[adapterPosition]
                 )
             }

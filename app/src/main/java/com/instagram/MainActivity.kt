@@ -19,7 +19,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresPermission
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
@@ -41,7 +40,6 @@ import ja.burhanrashid52.photoeditor.shape.ShapeBuilder
 import ja.burhanrashid52.photoeditor.shape.ShapeType
 import java.io.File
 import java.io.IOException
-import java.lang.Exception
 
 
 class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener,
@@ -140,7 +138,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
                     e.printStackTrace()
                 }
             }
-            else -> {
+            else                                    -> {
                 val intentType = intent.type
                 if (intentType != null && intentType.startsWith("image/")) {
                     val imageUri = intent.data
@@ -175,12 +173,36 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         imgShare.setOnClickListener(this)
     }
 
+//    override fun onEditTextChangeListener(rootView: View?, text: String?, colorCode: Int,font:String) {
+//        val textEditorDialogFragment = TextEditorDialogFragment.show(this, text.toString(), colorCode,font)
+//        textEditorDialogFragment.setOnTextEditorListener (object : TextEditorDialogFragment.TextEditorListener {
+//            override fun onDone(inputText: String?, colorCode: Int) {
+//                val styleBuilder = TextStyleBuilder()
+//                styleBuilder.withTextColor(colorCode)
+//                if (rootView != null) {
+//                    mPhotoEditor?.editText(rootView, inputText, styleBuilder)
+//                }
+//                mTxtCurrentTool?.setText(R.string.label_text)
+//            }
+//        })
+//    }
+
+    override fun onAddViewListener(viewType: ViewType?, numberOfAddedViews: Int) {
+        Log.d(
+            TAG,
+            "onAddViewListener() called with: viewType = [$viewType], numberOfAddedViews = [$numberOfAddedViews]"
+        )
+    }
+
     override fun onEditTextChangeListener(rootView: View?, text: String?, colorCode: Int) {
-        val textEditorDialogFragment = TextEditorDialogFragment.show(this, text.toString(), colorCode)
-        textEditorDialogFragment.setOnTextEditorListener (object : TextEditorDialogFragment.TextEditorListener {
-            override fun onDone(inputText: String?, colorCode: Int) {
+        val textEditorDialogFragment =
+            TextEditorDialogFragment.show(this, text.toString(), colorCode)
+        textEditorDialogFragment.setOnTextEditorListener(object :
+            TextEditorDialogFragment.TextEditorListener {
+            override fun onDone(inputText: String?, colorCode: Int, font: Typeface) {
                 val styleBuilder = TextStyleBuilder()
                 styleBuilder.withTextColor(colorCode)
+                styleBuilder.withTextFont(font)
                 if (rootView != null) {
                     mPhotoEditor?.editText(rootView, inputText, styleBuilder)
                 }
@@ -189,12 +211,11 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         })
     }
 
-    override fun onAddViewListener(viewType: ViewType?, numberOfAddedViews: Int) {
-        Log.d(TAG, "onAddViewListener() called with: viewType = [$viewType], numberOfAddedViews = [$numberOfAddedViews]")
-    }
-
     override fun onRemoveViewListener(viewType: ViewType?, numberOfAddedViews: Int) {
-        Log.d(TAG, "onRemoveViewListener() called with: viewType = [$viewType], numberOfAddedViews = [$numberOfAddedViews]")
+        Log.d(
+            TAG,
+            "onRemoveViewListener() called with: viewType = [$viewType], numberOfAddedViews = [$numberOfAddedViews]"
+        )
     }
 
     override fun onStartViewChangeListener(viewType: ViewType?) {
@@ -212,12 +233,12 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
     @SuppressLint("NonConstantResourceId", "MissingPermission")
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.imgUndo -> mPhotoEditor?.undo()
-            R.id.imgRedo -> mPhotoEditor?.redo()
-            R.id.imgSave -> saveImage()
-            R.id.imgClose -> onBackPressed()
-            R.id.imgShare -> shareImage()
-            R.id.imgCamera -> {
+            R.id.imgUndo    -> mPhotoEditor?.undo()
+            R.id.imgRedo    -> mPhotoEditor?.redo()
+            R.id.imgSave    -> saveImage()
+            R.id.imgClose   -> onBackPressed()
+            R.id.imgShare   -> shareImage()
+            R.id.imgCamera  -> {
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(cameraIntent, CAMERA_REQUEST)
             }
@@ -318,7 +339,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
                     val photo = data?.extras?.get("data") as Bitmap?
                     mPhotoEditorView?.source?.setImageBitmap(photo)
                 }
-                PICK_REQUEST -> try {
+                PICK_REQUEST   -> try {
                     mPhotoEditor?.clearAllViews()
                     val uri = data?.data
                     val bitmap = MediaStore.Images.Media.getBitmap(
@@ -384,45 +405,37 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
 
     override fun onToolSelected(toolType: ToolType?) {
         when (toolType) {
-            ToolType.SHAPE -> {
+            ToolType.SHAPE   -> {
                 mPhotoEditor?.setBrushDrawingMode(true)
                 mShapeBuilder = ShapeBuilder()
                 mPhotoEditor?.setShape(mShapeBuilder)
                 mTxtCurrentTool?.setText(R.string.label_shape)
                 showBottomSheetDialogFragment(mShapeBSFragment)
             }
-            ToolType.TEXT -> {
+            ToolType.TEXT    -> {
                 val textEditorDialogFragment = TextEditorDialogFragment.show(this)
-                textEditorDialogFragment.setOnTextEditorListener(object : TextEditorDialogFragment.TextEditorListener {
-                    override fun onDone(inputText: String?, colorCode: Int) {
+                textEditorDialogFragment.setOnTextEditorListener(object :
+                    TextEditorDialogFragment.TextEditorListener {
+                    override fun onDone(inputText: String?, colorCode: Int, font: Typeface) {
                         val styleBuilder = TextStyleBuilder()
                         styleBuilder.withTextColor(colorCode)
+                        styleBuilder.withTextFont(font)
                         mPhotoEditor?.addText(inputText, styleBuilder)
                         mTxtCurrentTool?.setText(R.string.label_text)
                     }
                 })
             }
-            ToolType.ERASER -> {
+            ToolType.ERASER  -> {
                 mPhotoEditor?.brushEraser()
                 mTxtCurrentTool?.setText(R.string.label_eraser_mode)
             }
-            ToolType.FILTER -> {
+            ToolType.FILTER  -> {
                 mTxtCurrentTool?.setText(R.string.label_filter)
                 showFilter(true)
             }
-            ToolType.EMOJI -> showBottomSheetDialogFragment(mEmojiBSFragment)
+            ToolType.EMOJI   -> showBottomSheetDialogFragment(mEmojiBSFragment)
             ToolType.STICKER -> showBottomSheetDialogFragment(mStickerBSFragment)
-            ToolType.TEXT1 -> {
-                val textEditorDialogFragment = TextEditorDialogFragment.show(this)
-                textEditorDialogFragment.setOnTextEditorListener(object : TextEditorDialogFragment.TextEditorListener {
-                    override fun onDone(inputText: String?, colorCode: Int) {
-                        val styleBuilder = TextStyleBuilder()
-                        styleBuilder.withTextColor(colorCode)
-                        mPhotoEditor?.addText(inputText, styleBuilder)
-                        mTxtCurrentTool?.setText(R.string.label_text)
-                    }
-                })
-            }
+
         }
     }
 
@@ -436,7 +449,8 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
     private fun showFilter(isVisible: Boolean) {
         mIsFilterVisible = isVisible
         mConstraintSet.clone(mRootView)
-        val rvFilterId: Int = mRvFilters?.id ?: throw IllegalArgumentException("RV Filter ID Expected")
+        val rvFilterId: Int =
+            mRvFilters?.id ?: throw IllegalArgumentException("RV Filter ID Expected")
         if (isVisible) {
             mConstraintSet.clear(rvFilterId, ConstraintSet.START)
             mConstraintSet.connect(
@@ -462,7 +476,8 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
     }
 
     override fun onBackPressed() {
-        val isCacheEmpty = mPhotoEditor?.isCacheEmpty ?: throw IllegalArgumentException("isCacheEmpty Expected")
+        val isCacheEmpty =
+            mPhotoEditor?.isCacheEmpty ?: throw IllegalArgumentException("isCacheEmpty Expected")
 
         if (mIsFilterVisible) {
             showFilter(false)
