@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,10 +15,11 @@
         android:layout_alignParentRight="true"
         android:background="@drawable/rounded_border_text_view"
         android:padding="10dp"
-        android:text="Done"
+        android:text="ذخیره"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +40,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_text_done_tv"
         tools:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toTopOf="@id/add_text_color_picker_recycler_view">
+
+        <ImageView
+            android:id="@+id/img_italic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_brush" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/add_text_color_picker_recycler_view"

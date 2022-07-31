@@ -2,7 +2,9 @@ package com.instagram.photoediting
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+import android.graphics.fonts.Font
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -10,21 +12,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.instagram.imageeditor.R
 import com.instagram.photoediting.ColorPickerAdapter.OnColorPickerClickListener
 
-/**
- * Created by Burhanuddin Rashid on 1/16/2018.
- */
 class TextEditorDialogFragment : DialogFragment() {
     private var mAddTextEditText: EditText? = null
+    private var imgItalic: ImageView? = null
     private var mAddTextDoneTextView: TextView? = null
     private var mInputMethodManager: InputMethodManager? = null
     private var mColorCode = 0
@@ -37,7 +39,6 @@ class TextEditorDialogFragment : DialogFragment() {
     override fun onStart() {
         super.onStart()
         val dialog = dialog
-        //Make dialog full screen with transparent background
         if (dialog != null) {
             val width = ViewGroup.LayoutParams.MATCH_PARENT
             val height = ViewGroup.LayoutParams.MATCH_PARENT
@@ -60,8 +61,7 @@ class TextEditorDialogFragment : DialogFragment() {
         mInputMethodManager =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         mAddTextDoneTextView = view.findViewById(R.id.add_text_done_tv)
-
-        //Setup the color picker for text color
+        imgItalic = view.findViewById(R.id.img_italic)
         val addTextColorPickerRecyclerView: RecyclerView =
             view.findViewById(R.id.add_text_color_picker_recycler_view)
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
@@ -69,7 +69,6 @@ class TextEditorDialogFragment : DialogFragment() {
         addTextColorPickerRecyclerView.setHasFixedSize(true)
         val colorPickerAdapter = ColorPickerAdapter(requireActivity())
 
-        //This listener will change the text color when clicked on any color from picker
         colorPickerAdapter.setOnColorPickerClickListener(object : OnColorPickerClickListener {
             override fun onColorPickerClickListener(colorCode: Int) {
                 mColorCode = colorCode
@@ -90,6 +89,10 @@ class TextEditorDialogFragment : DialogFragment() {
             if (!TextUtils.isEmpty(inputText) && mTextEditorListener != null) {
                 mTextEditorListener!!.onDone(inputText, mColorCode)
             }
+        }
+        imgItalic!!.setOnClickListener {
+            val typeface = ResourcesCompat.getFont(requireContext(),R.font.arabics)
+            mAddTextEditText!!.typeface = typeface
         }
     }
 

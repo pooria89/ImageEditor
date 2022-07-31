@@ -412,6 +412,17 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
             }
             ToolType.EMOJI -> showBottomSheetDialogFragment(mEmojiBSFragment)
             ToolType.STICKER -> showBottomSheetDialogFragment(mStickerBSFragment)
+            ToolType.TEXT1 -> {
+                val textEditorDialogFragment = TextEditorDialogFragment.show(this)
+                textEditorDialogFragment.setOnTextEditorListener(object : TextEditorDialogFragment.TextEditorListener {
+                    override fun onDone(inputText: String?, colorCode: Int) {
+                        val styleBuilder = TextStyleBuilder()
+                        styleBuilder.withTextColor(colorCode)
+                        mPhotoEditor?.addText(inputText, styleBuilder)
+                        mTxtCurrentTool?.setText(R.string.label_text)
+                    }
+                })
+            }
         }
     }
 
