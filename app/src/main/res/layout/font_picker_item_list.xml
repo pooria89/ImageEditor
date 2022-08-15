@@ -16,7 +16,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
-            android:background="@drawable/pooria" />
+            android:background="@drawable/splash" />
 
 <!--        <TextView-->
 <!--            android:id="@+id/txtFont"-->

@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +23,6 @@ import com.instagram.photoediting.ColorPickerAdapter.OnColorPickerClickListener
 
 class TextEditorDialogFragment : DialogFragment() {
     private var mAddTextEditText: EditText? = null
-    private var imgItalic: ImageView? = null
     private var mAddTextDoneTextView: TextView? = null
     private var mInputMethodManager: InputMethodManager? = null
     private var mColorCode = 0
@@ -32,7 +30,7 @@ class TextEditorDialogFragment : DialogFragment() {
     private var mTextEditorListener: TextEditorListener? = null
 
     interface TextEditorListener {
-        fun onDone(inputText: String?, colorCode: Int, font: Typeface)
+        fun onDone(inputText: String?, colorCode: Int)
     }
 
     override fun onStart() {
@@ -54,55 +52,32 @@ class TextEditorDialogFragment : DialogFragment() {
         return inflater.inflate(R.layout.add_text_dialog, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAddTextEditText = view.findViewById(R.id.add_text_edit_text)
         mInputMethodManager =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         mAddTextDoneTextView = view.findViewById(R.id.add_text_done_tv)
-//        imgItalic = view.findViewById(R.id.img_italic)
+
+        //Setup the color picker for text color
         val addTextColorPickerRecyclerView: RecyclerView =
             view.findViewById(R.id.add_text_color_picker_recycler_view)
-        val addFontPickerRecyclerView: RecyclerView =
-            view.findViewById(R.id.add_text_font_picker_recycler_view)
-
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        val layoutManager1 = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-
-        mAddTextEditText?.requestFocus()
-
         addTextColorPickerRecyclerView.layoutManager = layoutManager
-        addFontPickerRecyclerView.layoutManager = layoutManager1
-
         addTextColorPickerRecyclerView.setHasFixedSize(true)
-        addFontPickerRecyclerView.setHasFixedSize(true)
-
         val colorPickerAdapter = ColorPickerAdapter(requireActivity())
-        val fontPickerAdapter = FontPickerAdapter(requireActivity())
 
-
+        //This listener will change the text color when clicked on any color from picker
         colorPickerAdapter.setOnColorPickerClickListener(object : OnColorPickerClickListener {
             override fun onColorPickerClickListener(colorCode: Int) {
                 mColorCode = colorCode
                 mAddTextEditText!!.setTextColor(colorCode)
             }
         })
-
-        fontPickerAdapter.setOnFontClickListener(object :
-            FontPickerAdapter.OnFontPickerClickListener {
-            override fun onFontClickListener(code: Typeface) {
-                mFont = code
-                mAddTextEditText!!.typeface = code
-            }
-        })
-
         addTextColorPickerRecyclerView.adapter = colorPickerAdapter
-        addFontPickerRecyclerView.adapter = fontPickerAdapter
-
         mAddTextEditText!!.setText(requireArguments().getString(EXTRA_INPUT_TEXT))
         mColorCode = requireArguments().getInt(EXTRA_COLOR_CODE)
-//            mAddTextEditText!!.typeface = typeface
-//        mFont = requireArguments().getBundle(EXTRA_FONT_CODE)
         mAddTextEditText!!.setTextColor(mColorCode)
         mInputMethodManager!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 
@@ -112,15 +87,11 @@ class TextEditorDialogFragment : DialogFragment() {
             dismiss()
             val inputText = mAddTextEditText!!.text.toString()
             if (!TextUtils.isEmpty(inputText) && mTextEditorListener != null) {
-                mFont?.let { mTextEditorListener!!.onDone(inputText, mColorCode, it) }
+                mTextEditorListener!!.onDone(inputText, mColorCode)
             }
-
         }
-//        imgItalic!!.setOnClickListener {
-//            val typeface = ResourcesCompat.getFont(requireContext(),R.font.arabics)
-//            mAddTextEditText!!.typeface = typeface
-//        }
     }
+
 
     //Callback to listener if user is done with text editing
     fun setOnTextEditorListener(textEditorListener: TextEditorListener) {

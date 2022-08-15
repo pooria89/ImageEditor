@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -82,10 +81,8 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         super.onCreate(savedInstanceState)
         makeFullScreen()
         setContentView(R.layout.activity_main)
-        setContentView(R.layout.activity_main)
         initViews()
         handleIntentImage(mPhotoEditorView?.source)
-//        mWonderFont = Typeface.createFromAsset(assets, "beyond_wonderland.ttf")
         mPropertiesBSFragment = PropertiesBSFragment()
         mEmojiBSFragment = EmojiBSFragment()
         mStickerBSFragment = StickerBSFragment()
@@ -101,23 +98,17 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         mRvFilters?.layoutManager = llmFilters
         mRvFilters?.adapter = mFilterViewAdapter
 
-        // NOTE(lucianocheng): Used to set integration testing parameters to PhotoEditor
         val pinchTextScalable = intent.getBooleanExtra(PINCH_TEXT_SCALABLE_INTENT_KEY, true)
 
-        //Typeface mTextRobotoTf = ResourcesCompat.getFont(this, R.font.roboto_medium);
-        //Typeface mEmojiTypeFace = Typeface.createFromAsset(getAssets(), "emojione-android.ttf");
         mPhotoEditor = mPhotoEditorView?.run {
             PhotoEditor.Builder(this@MainActivity, this)
                 .setPinchTextScalable(pinchTextScalable) // set flag to make text scalable when pinch
-                //.setDefaultTextTypeface(mTextRobotoTf)
-                //.setDefaultEmojiTypeface(mEmojiTypeFace)
-                .build() // build photo editor sdk
+                .build()
         }
         mPhotoEditor?.setOnPhotoEditorListener(this)
 
-        //Set Image Dynamically
-        mPhotoEditorView?.source?.setImageResource(R.drawable.paris_tower)
-        mSaveFileHelper = FileSaveHelper(this)
+//        mPhotoEditorView?.source?.setImageResource(R.drawable.splash)
+//        mSaveFileHelper = FileSaveHelper(this)
 
     }
 
@@ -173,19 +164,6 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         imgShare.setOnClickListener(this)
     }
 
-//    override fun onEditTextChangeListener(rootView: View?, text: String?, colorCode: Int,font:String) {
-//        val textEditorDialogFragment = TextEditorDialogFragment.show(this, text.toString(), colorCode,font)
-//        textEditorDialogFragment.setOnTextEditorListener (object : TextEditorDialogFragment.TextEditorListener {
-//            override fun onDone(inputText: String?, colorCode: Int) {
-//                val styleBuilder = TextStyleBuilder()
-//                styleBuilder.withTextColor(colorCode)
-//                if (rootView != null) {
-//                    mPhotoEditor?.editText(rootView, inputText, styleBuilder)
-//                }
-//                mTxtCurrentTool?.setText(R.string.label_text)
-//            }
-//        })
-//    }
 
     override fun onAddViewListener(viewType: ViewType?, numberOfAddedViews: Int) {
         Log.d(
@@ -199,10 +177,9 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
             TextEditorDialogFragment.show(this, text.toString(), colorCode)
         textEditorDialogFragment.setOnTextEditorListener(object :
             TextEditorDialogFragment.TextEditorListener {
-            override fun onDone(inputText: String?, colorCode: Int, font: Typeface) {
+            override fun onDone(inputText: String?, colorCode: Int) {
                 val styleBuilder = TextStyleBuilder()
                 styleBuilder.withTextColor(colorCode)
-                styleBuilder.withTextFont(font)
                 if (rootView != null) {
                     mPhotoEditor?.editText(rootView, inputText, styleBuilder)
                 }
@@ -210,6 +187,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
             }
         })
     }
+
 
     override fun onRemoveViewListener(viewType: ViewType?, numberOfAddedViews: Int) {
         Log.d(
@@ -416,10 +394,9 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
                 val textEditorDialogFragment = TextEditorDialogFragment.show(this)
                 textEditorDialogFragment.setOnTextEditorListener(object :
                     TextEditorDialogFragment.TextEditorListener {
-                    override fun onDone(inputText: String?, colorCode: Int, font: Typeface) {
+                    override fun onDone(inputText: String?, colorCode: Int) {
                         val styleBuilder = TextStyleBuilder()
                         styleBuilder.withTextColor(colorCode)
-                        styleBuilder.withTextFont(font)
                         mPhotoEditor?.addText(inputText, styleBuilder)
                         mTxtCurrentTool?.setText(R.string.label_text)
                     }
