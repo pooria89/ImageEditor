@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ادیتور</string>
+    <string name="app_name">ادیتور عکس</string>
     <string name="label_brush">قلم</string>
     <string name="label_shape">حالت</string>
     <string name="label_oval">بیضی</string>

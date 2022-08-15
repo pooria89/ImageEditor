@@ -107,8 +107,8 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         }
         mPhotoEditor?.setOnPhotoEditorListener(this)
 
-//        mPhotoEditorView?.source?.setImageResource(R.drawable.splash)
-//        mSaveFileHelper = FileSaveHelper(this)
+        mPhotoEditorView?.source?.setImageResource(R.drawable.paris_tower)
+        mSaveFileHelper = FileSaveHelper(this)
 
     }
 
