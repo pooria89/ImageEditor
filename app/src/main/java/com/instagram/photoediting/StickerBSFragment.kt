@@ -105,8 +105,8 @@ class StickerBSFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-        // Image Urls from flaticon(https://www.flaticon.com/stickers-pack/food-289)
         private val stickerPathList = arrayOf(
+            // Face
             "https://cdn-icons-png.flaticon.com/256/4392/4392452.png",
             "https://cdn-icons-png.flaticon.com/256/4392/4392455.png",
             "https://cdn-icons-png.flaticon.com/256/4392/4392459.png",
@@ -116,6 +116,21 @@ class StickerBSFragment : BottomSheetDialogFragment() {
             "https://cdn-icons-png.flaticon.com/256/4392/4392469.png",
             "https://cdn-icons-png.flaticon.com/256/4392/4392471.png",
             "https://cdn-icons-png.flaticon.com/256/4392/4392522.png",
+            // Love
+            "https://cdn-icons-png.flaticon.com/512/4288/4288991.png",
+            "https://cdn-icons-png.flaticon.com/512/4289/4289404.png",
+            "https://cdn-icons-png.flaticon.com/512/4289/4289405.png",
+            "https://cdn-icons-png.flaticon.com/512/4289/4289409.png",
+            "https://cdn-icons-png.flaticon.com/512/4289/4289415.png",
+            "https://cdn-icons-png.flaticon.com/512/4289/4289416.png",
+            // Birthday
+            "https://cdn-icons-png.flaticon.com/512/4213/4213691.png",
+            "https://cdn-icons-png.flaticon.com/512/4213/4213641.png",
+            "https://cdn-icons-png.flaticon.com/512/4213/4213697.png",
+            // Animals
+            "https://cdn-icons-png.flaticon.com/512/4213/4213623.png",
+            "https://cdn-icons-png.flaticon.com/512/4213/4213636.png",
+            "https://cdn-icons-png.flaticon.com/512/4213/4213708.png"
         )
     }
 }
