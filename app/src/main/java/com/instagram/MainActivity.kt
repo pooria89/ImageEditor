@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -72,10 +73,10 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
     private val mConstraintSet = ConstraintSet()
     private var mIsFilterVisible = false
 
+
     @VisibleForTesting
     var mSaveImageUri: Uri? = null
     private var mSaveFileHelper: FileSaveHelper? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,7 +103,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
 
         mPhotoEditor = mPhotoEditorView?.run {
             PhotoEditor.Builder(this@MainActivity, this)
-                .setPinchTextScalable(pinchTextScalable) // set flag to make text scalable when pinch
+                .setPinchTextScalable(pinchTextScalable)
                 .build()
         }
         mPhotoEditor?.setOnPhotoEditorListener(this)
@@ -177,9 +178,10 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
             TextEditorDialogFragment.show(this, text.toString(), colorCode)
         textEditorDialogFragment.setOnTextEditorListener(object :
             TextEditorDialogFragment.TextEditorListener {
-            override fun onDone(inputText: String?, colorCode: Int) {
+            override fun onDone(inputText: String?, colorCode: Int, mFont: Typeface) {
                 val styleBuilder = TextStyleBuilder()
                 styleBuilder.withTextColor(colorCode)
+                styleBuilder.withTextFont(mFont)
                 if (rootView != null) {
                     mPhotoEditor?.editText(rootView, inputText, styleBuilder)
                 }
@@ -341,6 +343,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         mTxtCurrentTool?.setText(R.string.label_brush)
     }
 
+
     override fun onShapeSizeChanged(shapeSize: Int) {
         mPhotoEditor?.setShape(mShapeBuilder?.withShapeSize(shapeSize.toFloat()))
         mTxtCurrentTool?.setText(R.string.label_brush)
@@ -394,12 +397,14 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
                 val textEditorDialogFragment = TextEditorDialogFragment.show(this)
                 textEditorDialogFragment.setOnTextEditorListener(object :
                     TextEditorDialogFragment.TextEditorListener {
-                    override fun onDone(inputText: String?, colorCode: Int) {
+                    override fun onDone(inputText: String?, colorCode: Int, mFont: Typeface) {
                         val styleBuilder = TextStyleBuilder()
                         styleBuilder.withTextColor(colorCode)
+                        styleBuilder.withTextFont(mFont)
                         mPhotoEditor?.addText(inputText, styleBuilder)
                         mTxtCurrentTool?.setText(R.string.label_text)
                     }
+
                 })
             }
             ToolType.ERASER  -> {
@@ -465,4 +470,5 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
             super.onBackPressed()
         }
     }
+
 }

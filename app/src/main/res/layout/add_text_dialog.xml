@@ -13,9 +13,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
         android:background="@drawable/rounded_border_text_view"
         android:padding="15dp"
-        android:layout_margin="10dp"
         android:text="ذخیره"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -47,6 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/add_text_color_picker_recycler_view"
@@ -54,7 +55,6 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:background="@android:color/white"
         tools:layout_height="wrap_content"
-        android:visibility="gone"
         tools:listitem="@layout/font_picker_item_list" />
 
 
