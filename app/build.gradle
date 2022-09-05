@@ -63,6 +63,8 @@ dependencies {
     // Support Imojies
     implementation('androidx.emoji:emoji:1.1.0')
 
+    implementation project(":imageeditor")
+
 }
 
 ext {

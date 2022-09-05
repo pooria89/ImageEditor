@@ -19,7 +19,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.instagram.imageeditor.R
-import com.instagram.photoediting.ColorPickerAdapter.OnColorPickerClickListener
 
 
 class TextEditorDialogFragment : DialogFragment() {
@@ -83,7 +82,8 @@ class TextEditorDialogFragment : DialogFragment() {
         val colorPickerAdapter = ColorPickerAdapter(requireActivity())
         val fontPickerAdapter = FontPickerAdapter(requireActivity())
 
-        colorPickerAdapter.setOnColorPickerClickListener(object : OnColorPickerClickListener {
+        colorPickerAdapter.setOnColorPickerClickListener(object :
+            ColorPickerAdapter.OnColorPickerClickListener {
             override fun onColorPickerClickListener(colorCode: Int) {
                 mColorCode = colorCode
                 mAddTextEditText!!.setTextColor(colorCode)

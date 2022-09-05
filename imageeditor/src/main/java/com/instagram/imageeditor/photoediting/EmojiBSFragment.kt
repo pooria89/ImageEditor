@@ -10,11 +10,10 @@ import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.instagram.photoediting.PhotoApp.Companion.photoApp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.instagram.imageeditor.R
+import com.instagram.imageeditor.photoediting.PhotoApp.Companion.photoApp
 
 class EmojiBSFragment : BottomSheetDialogFragment() {
     private var mEmojiListener: EmojiListener? = null
@@ -23,7 +22,7 @@ class EmojiBSFragment : BottomSheetDialogFragment() {
         fun onEmojiClick(emojiUnicode: String?)
     }
 
-    private val mBottomSheetBehaviorCallback: BottomSheetCallback = object : BottomSheetCallback() {
+    private val mBottomSheetBehaviorCallback: BottomSheetBehavior.BottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 dismiss()

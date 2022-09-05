@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.instagram.imageeditor.R
-import com.instagram.photoediting.ColorPickerAdapter.OnColorPickerClickListener
 import ja.burhanrashid52.photoeditor.shape.ShapeType
 
 class ShapeBSFragment : BottomSheetDialogFragment(), SeekBar.OnSeekBarChangeListener {
@@ -63,7 +62,8 @@ class ShapeBSFragment : BottomSheetDialogFragment(), SeekBar.OnSeekBarChangeList
         rvColor.layoutManager = layoutManager
         rvColor.setHasFixedSize(true)
         val colorPickerAdapter = ColorPickerAdapter(requireActivity())
-        colorPickerAdapter.setOnColorPickerClickListener(object : OnColorPickerClickListener {
+        colorPickerAdapter.setOnColorPickerClickListener(object :
+            ColorPickerAdapter.OnColorPickerClickListener {
             override fun onColorPickerClickListener(colorCode: Int) {
                 if (mProperties != null) {
                     dismiss()
