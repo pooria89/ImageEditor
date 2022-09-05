@@ -54,6 +54,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         private const val PICK_REQUEST = 53
         const val ACTION_NEXTGEN_EDIT = "action_nextgen_edit"
         const val PINCH_TEXT_SCALABLE_INTENT_KEY = "PINCH_TEXT_SCALABLE"
+
     }
 
 
