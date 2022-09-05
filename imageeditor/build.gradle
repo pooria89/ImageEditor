@@ -10,7 +10,7 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 32
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -50,6 +50,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.android.support:multidex:2.0.1'
 
     // Image Editor
     implementation 'com.burhanrashid52:photoeditor:2.0.0'
@@ -69,7 +70,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.pooria89'
                 artifactId = 'image-editor'
-                version = '1.0.0'
+                version = '1.1.2'
             }
         }
     }
