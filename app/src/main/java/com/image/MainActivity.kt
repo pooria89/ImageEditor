@@ -1,10 +1,10 @@
-package com.instagram
+package com.image
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.image.imageeditor.R
 import com.instagram.imageeditor.ImageEditorActivity
-import com.instagram.imageeditor.R
 
 
 class MainActivity : AppCompatActivity() {
