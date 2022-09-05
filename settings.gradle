@@ -9,6 +9,9 @@ pluginManagement {
         gradlePluginPortal()
         maven { url 'https://gradle.iranrepo.ir' }
         maven { url 'https://maven.google.com' }
+        maven {
+            url = uri("https://storage.googleapis.com/r8-releases/raw")
+        }
     }
 }
 dependencyResolutionManagement {
@@ -19,6 +22,9 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://gradle.iranrepo.ir' }
         maven { url 'https://maven.google.com' }
+        maven {
+            url = uri("https://storage.googleapis.com/r8-releases/raw")
+        }
     }
 }
 rootProject.name = "ImageEditor"
