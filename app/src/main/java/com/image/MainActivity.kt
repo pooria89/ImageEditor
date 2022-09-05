@@ -14,5 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         val intent = Intent(this, ImageEditorActivity::class.java)
         startActivity(intent)
+
     }
 }
