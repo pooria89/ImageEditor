@@ -1,4 +1,4 @@
-package com.instagram
+package com.instagram.imageeditor
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -28,13 +28,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.instagram.imageeditor.R
-import com.instagram.photoediting.*
-import com.instagram.photoediting.base.BaseActivity
-import com.instagram.photoediting.filters.FilterListener
-import com.instagram.photoediting.filters.FilterViewAdapter
-import com.instagram.photoediting.tools.EditingToolsAdapter
-import com.instagram.photoediting.tools.ToolType
+import com.instagram.imageeditor.photoediting.*
+import com.instagram.imageeditor.photoediting.base.BaseActivity
+import com.instagram.imageeditor.photoediting.filters.FilterListener
+import com.instagram.imageeditor.photoediting.filters.FilterViewAdapter
+import com.instagram.imageeditor.photoediting.tools.EditingToolsAdapter
+import com.instagram.imageeditor.photoediting.tools.ToolType
 import ja.burhanrashid52.photoeditor.*
 import ja.burhanrashid52.photoeditor.shape.ShapeBuilder
 import ja.burhanrashid52.photoeditor.shape.ShapeType
@@ -42,13 +41,13 @@ import java.io.File
 import java.io.IOException
 
 
-class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener,
+class ImageEditorActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener,
     PropertiesBSFragment.Properties, ShapeBSFragment.Properties, EmojiBSFragment.EmojiListener,
     StickerBSFragment.StickerListener,
     EditingToolsAdapter.OnItemSelected, FilterListener {
 
     companion object {
-        private val TAG = MainActivity::class.java.simpleName
+        private val TAG = ImageEditorActivity::class.java.simpleName
         const val FILE_PROVIDER_AUTHORITY = "com.burhanrashid52.photoediting.fileprovider"
         private const val CAMERA_REQUEST = 52
         private const val PICK_REQUEST = 53
@@ -81,7 +80,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         makeFullScreen()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_image_editor)
         initViews()
         handleIntentImage(mPhotoEditorView?.source)
         mPropertiesBSFragment = PropertiesBSFragment()
@@ -102,7 +101,7 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         val pinchTextScalable = intent.getBooleanExtra(PINCH_TEXT_SCALABLE_INTENT_KEY, true)
 
         mPhotoEditor = mPhotoEditorView?.run {
-            PhotoEditor.Builder(this@MainActivity, this)
+            PhotoEditor.Builder(this@ImageEditorActivity, this)
                 .setPinchTextScalable(pinchTextScalable)
                 .build()
         }
@@ -165,7 +164,6 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
         imgShare.setOnClickListener(this)
     }
 
-
     override fun onAddViewListener(viewType: ViewType?, numberOfAddedViews: Int) {
         Log.d(
             TAG,
@@ -189,7 +187,6 @@ class MainActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickListener
             }
         })
     }
-
 
     override fun onRemoveViewListener(viewType: ViewType?, numberOfAddedViews: Int) {
         Log.d(
