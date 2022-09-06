@@ -11,9 +11,9 @@
 
 ## Screenshots
 
-| Image | Image | Image
+| Filter | Image | Emoji
 |--|--|--|
-| <img src="https://github.com/Pooria89/ImageEditor/blob/github/screenshots/1.jpg" width="250" /> | <img src="https://github.com/Pooria89/ImageEditor/blob/github/screenshots/3.jpg" width="250" width="250" /> | <img src="https://github.com/Pooria89/ImageEditor/blob/github/screenshots/4.jpg" width="250" />
+| <img src="https://github.com/Pooria89/ImageEditor/blob/github/screenshots/3.jpg" width="250" /> | <img src="https://github.com/Pooria89/ImageEditor/blob/github/screenshots/1.jpg" width="250" width="250" /> | <img src="https://github.com/Pooria89/ImageEditor/blob/github/screenshots/4.jpg" width="250" />
 
 ## Download
 
