@@ -2,6 +2,7 @@ package com.instagram.imageeditor
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -53,6 +54,14 @@ class ImageEditorActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickL
         private const val PICK_REQUEST = 53
         const val ACTION_NEXTGEN_EDIT = "action_nextgen_edit"
         const val PINCH_TEXT_SCALABLE_INTENT_KEY = "PINCH_TEXT_SCALABLE"
+
+
+        @JvmStatic
+        fun start(context: Context) {
+            val starter = Intent(context, ImageEditorActivity::class.java)
+            context.startActivity(starter)
+        }
+
     }
 
 
